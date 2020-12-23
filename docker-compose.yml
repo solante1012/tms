@@ -1,0 +1,25 @@
+version: "3"
+services:
+  web:
+    build:
+      context: .
+    image: tms-web
+    networks:
+      - backend
+    ports:
+      - "8090:8080"
+    depends_on:
+      - "db"
+  db:
+    build:
+      context: ./db
+    image: tms-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=pingan
+    networks:
+      - backend
+    ports:
+      - "3307:3306"
+
+networks:
+  backend:
